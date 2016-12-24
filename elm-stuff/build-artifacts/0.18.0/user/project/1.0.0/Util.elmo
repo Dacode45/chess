@@ -1,0 +1,23 @@
+var _user$project$Util$filterJusts = function (list) {
+	filterJusts:
+	while (true) {
+		var _p0 = list;
+		if (_p0.ctor === '[]') {
+			return {ctor: '[]'};
+		} else {
+			var _p2 = _p0._1;
+			var _p1 = _p0._0;
+			if (_p1.ctor === 'Nothing') {
+				var _v2 = _p2;
+				list = _v2;
+				continue filterJusts;
+			} else {
+				return {
+					ctor: '::',
+					_0: _p1._0,
+					_1: _user$project$Util$filterJusts(_p2)
+				};
+			}
+		}
+	}
+};

@@ -1,0 +1,5 @@
+var _user$project$Msg$SubmitCommand = {ctor: 'SubmitCommand'};
+var _user$project$Msg$CommandChange = function (a) {
+	return {ctor: 'CommandChange', _0: a};
+};
+var _user$project$Msg$Reset = {ctor: 'Reset'};

@@ -1,0 +1,292 @@
+var _user$project$GameRender$renderBoardSquare = F2(
+	function (model, index) {
+		var row = (index / 8) | 0;
+		var col = A2(_elm_lang$core$Basics_ops['%'], index, 8);
+		var squareColor = _elm_lang$core$Native_Utils.eq(
+			A2(_elm_lang$core$Basics_ops['%'], col + row, 2),
+			0) ? 'fill:rgb(0,0,255);' : 'fill:rgb(255,0,0)';
+		return A2(
+			_elm_lang$svg$Svg$rect,
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$x(
+					_elm_lang$core$Basics$toString(700 - (100 * col))),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$y(
+						_elm_lang$core$Basics$toString(700 - (100 * row))),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$width('100'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$height('100'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$svg$Svg_Attributes$style(squareColor),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				}
+			},
+			{ctor: '[]'});
+	});
+var _user$project$GameRender$renderBoardYAxis = function (model) {
+	var yAxisConstructor = function (index) {
+		return A2(
+			_elm_lang$svg$Svg$g,
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$transform(
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						'translate(0,',
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							_elm_lang$core$Basics$toString(100 * index),
+							')'))),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$svg$Svg$rect,
+					{
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$width('100'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$height('100'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$svg$Svg_Attributes$style('fill:white;'),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$svg$Svg$text_,
+						{
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$x('50'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$svg$Svg_Attributes$y('50'),
+								_1: {ctor: '[]'}
+							}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$svg$Svg$text(
+								_elm_lang$core$Basics$toString(index + 1)),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			});
+	};
+	var yAxis = A2(_elm_lang$core$Array$initialize, 8, yAxisConstructor);
+	return A2(
+		_elm_lang$svg$Svg$g,
+		{
+			ctor: '::',
+			_0: _elm_lang$svg$Svg_Attributes$transform('translate(0, 100)'),
+			_1: {ctor: '[]'}
+		},
+		_elm_lang$core$Array$toList(yAxis));
+};
+var _user$project$GameRender$renderBoardXAxis = function (model) {
+	var numberToLetter = function (num) {
+		return _elm_lang$core$String$fromChar(
+			_elm_lang$core$Char$fromCode(
+				A2(
+					F2(
+						function (x, y) {
+							return x + y;
+						}),
+					num,
+					_elm_lang$core$Char$toCode(
+						_elm_lang$core$Native_Utils.chr('a')))));
+	};
+	var xAxisConstructor = function (index) {
+		return A2(
+			_elm_lang$svg$Svg$g,
+			{
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$transform(
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						'translate(',
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							_elm_lang$core$Basics$toString(100 * index),
+							',0)'))),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$svg$Svg$rect,
+					{
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$width('100'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$height('100'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$svg$Svg_Attributes$style('fill:white;'),
+								_1: {ctor: '[]'}
+							}
+						}
+					},
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$svg$Svg$text_,
+						{
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$x('50'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$svg$Svg_Attributes$y('50'),
+								_1: {ctor: '[]'}
+							}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$svg$Svg$text(
+								numberToLetter(index)),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			});
+	};
+	var xAxis = A2(_elm_lang$core$Array$initialize, 8, xAxisConstructor);
+	return A2(
+		_elm_lang$svg$Svg$g,
+		{
+			ctor: '::',
+			_0: _elm_lang$svg$Svg_Attributes$transform('translate(100,0)'),
+			_1: {ctor: '[]'}
+		},
+		_elm_lang$core$Array$toList(xAxis));
+};
+var _user$project$GameRender$renderBoard = function (model) {
+	var board = A2(
+		_elm_lang$core$Array$initialize,
+		64,
+		_user$project$GameRender$renderBoardSquare(model));
+	return A2(
+		_elm_lang$svg$Svg$g,
+		{
+			ctor: '::',
+			_0: _elm_lang$svg$Svg_Attributes$transform('translate(100,100)'),
+			_1: {ctor: '[]'}
+		},
+		_elm_lang$core$Array$toList(board));
+};
+var _user$project$GameRender$pieceImagePath = function (piece) {
+	var cColor = _elm_lang$core$Native_Utils.eq(piece.cColor, _user$project$Model$White) ? 'white' : 'black';
+	var _p0 = piece.rank;
+	switch (_p0.ctor) {
+		case 'King':
+			return A2(_elm_lang$core$Basics_ops['++'], 'king_', cColor);
+		case 'Queen':
+			return A2(_elm_lang$core$Basics_ops['++'], 'queen_', cColor);
+		case 'Bishop':
+			return A2(_elm_lang$core$Basics_ops['++'], 'bishop_', cColor);
+		case 'Knight':
+			return A2(_elm_lang$core$Basics_ops['++'], 'knight_', cColor);
+		case 'Rook':
+			return A2(_elm_lang$core$Basics_ops['++'], 'rook_', cColor);
+		case 'Pawn':
+			return A2(_elm_lang$core$Basics_ops['++'], 'pawn_', cColor);
+		default:
+			return 'none';
+	}
+};
+var _user$project$GameRender$renderPiece = function (piece) {
+	var _p1 = piece.pos;
+	var row = _p1._0;
+	var col = _p1._1;
+	var fullImagePath = A2(
+		_elm_lang$core$Basics_ops['++'],
+		'./pieces/',
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			_user$project$GameRender$pieceImagePath(piece),
+			'.svg'));
+	return A2(
+		_elm_lang$svg$Svg$image,
+		{
+			ctor: '::',
+			_0: _elm_lang$svg$Svg_Attributes$x(
+				_elm_lang$core$Basics$toString(100 * col)),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$y(
+					_elm_lang$core$Basics$toString(700 - (100 * row))),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$svg$Svg_Attributes$width('80'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$svg$Svg_Attributes$height('80'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$svg$Svg_Attributes$xlinkHref(fullImagePath),
+							_1: {ctor: '[]'}
+						}
+					}
+				}
+			}
+		},
+		{ctor: '[]'});
+};
+var _user$project$GameRender$renderPieces = function (model) {
+	return A2(
+		_elm_lang$svg$Svg$g,
+		{
+			ctor: '::',
+			_0: _elm_lang$svg$Svg_Attributes$transform('translate(100, 100)'),
+			_1: {ctor: '[]'}
+		},
+		A2(_elm_lang$core$List$map, _user$project$GameRender$renderPiece, model.board.pieces));
+};
+var _user$project$GameRender$renderGame = function (model) {
+	return A2(
+		_elm_lang$svg$Svg$svg,
+		{
+			ctor: '::',
+			_0: _elm_lang$svg$Svg_Attributes$width('900'),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$svg$Svg_Attributes$height('900'),
+				_1: {ctor: '[]'}
+			}
+		},
+		{
+			ctor: '::',
+			_0: _user$project$GameRender$renderBoardYAxis(model),
+			_1: {
+				ctor: '::',
+				_0: _user$project$GameRender$renderBoardXAxis(model),
+				_1: {
+					ctor: '::',
+					_0: _user$project$GameRender$renderBoard(model),
+					_1: {
+						ctor: '::',
+						_0: _user$project$GameRender$renderPieces(model),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		});
+};

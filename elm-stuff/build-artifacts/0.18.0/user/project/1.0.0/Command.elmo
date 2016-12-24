@@ -1,0 +1,103 @@
+var _user$project$Command$findPosition = function (str) {
+	var matches = A3(
+		_elm_lang$core$Regex$find,
+		_elm_lang$core$Regex$AtMost(1),
+		_elm_lang$core$Regex$caseInsensitive(
+			_elm_lang$core$Regex$regex('([a|b|c|d|e|f|g|h])\\s*(\\d)')),
+		str);
+	var _p0 = A2(
+		_elm_lang$core$Debug$log,
+		_elm_lang$core$Basics$toString(matches),
+		1);
+	var _p1 = _elm_lang$core$List$head(matches);
+	if (_p1.ctor === 'Just') {
+		var _p2 = _p1._0.submatches;
+		if (((((_p2.ctor === '::') && (_p2._0.ctor === 'Just')) && (_p2._1.ctor === '::')) && (_p2._1._0.ctor === 'Just')) && (_p2._1._1.ctor === '[]')) {
+			var $char = _elm_lang$core$List$head(
+				_elm_lang$core$String$toList(_p2._0._0));
+			var col_ = function () {
+				var _p3 = $char;
+				if (_p3.ctor === 'Just') {
+					return _elm_lang$core$Char$toCode(_p3._0) - _elm_lang$core$Char$toCode(
+						_elm_lang$core$Native_Utils.chr('a'));
+				} else {
+					return -1;
+				}
+			}();
+			return {
+				ctor: '_Tuple2',
+				_0: A2(
+					_elm_lang$core$Result$withDefault,
+					-1,
+					_elm_lang$core$String$toInt(_p2._1._0._0)),
+				_1: col_
+			};
+		} else {
+			return {ctor: '_Tuple2', _0: -1, _1: -1};
+		}
+	} else {
+		return {ctor: '_Tuple2', _0: -1, _1: -1};
+	}
+};
+var _user$project$Command$buildRegex = function (regexStr) {
+	return A2(
+		_elm_lang$core$Regex$find,
+		_elm_lang$core$Regex$AtMost(1),
+		_elm_lang$core$Regex$caseInsensitive(
+			_elm_lang$core$Regex$regex(
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					'(',
+					A2(_elm_lang$core$Basics_ops['++'], regexStr, ')')))));
+};
+var _user$project$Command$kingRegex = _user$project$Command$buildRegex('king');
+var _user$project$Command$queenRegex = _user$project$Command$buildRegex('queen');
+var _user$project$Command$knightRegex = _user$project$Command$buildRegex('knight');
+var _user$project$Command$bishopRegex = _user$project$Command$buildRegex('bishop');
+var _user$project$Command$pawnRegex = _user$project$Command$buildRegex('pawn');
+var _user$project$Command$rookRegex = _user$project$Command$buildRegex('rook|castle');
+var _user$project$Command$findRank = function (str) {
+	return A2(
+		F2(
+			function (x, y) {
+				return _elm_lang$core$Native_Utils.eq(x, y);
+			}),
+		1,
+		_elm_lang$core$List$length(
+			_user$project$Command$kingRegex(str))) ? _user$project$Model$King(false) : (A2(
+		F2(
+			function (x, y) {
+				return _elm_lang$core$Native_Utils.eq(x, y);
+			}),
+		1,
+		_elm_lang$core$List$length(
+			_user$project$Command$queenRegex(str))) ? _user$project$Model$Queen : (A2(
+		F2(
+			function (x, y) {
+				return _elm_lang$core$Native_Utils.eq(x, y);
+			}),
+		1,
+		_elm_lang$core$List$length(
+			_user$project$Command$bishopRegex(str))) ? _user$project$Model$Bishop : (A2(
+		F2(
+			function (x, y) {
+				return _elm_lang$core$Native_Utils.eq(x, y);
+			}),
+		1,
+		_elm_lang$core$List$length(
+			_user$project$Command$knightRegex(str))) ? _user$project$Model$Knight : (A2(
+		F2(
+			function (x, y) {
+				return _elm_lang$core$Native_Utils.eq(x, y);
+			}),
+		1,
+		_elm_lang$core$List$length(
+			_user$project$Command$pawnRegex(str))) ? _user$project$Model$Pawn : (A2(
+		F2(
+			function (x, y) {
+				return _elm_lang$core$Native_Utils.eq(x, y);
+			}),
+		1,
+		_elm_lang$core$List$length(
+			_user$project$Command$rookRegex(str))) ? _user$project$Model$Rook(false) : _user$project$Model$None)))));
+};

@@ -1,0 +1,1098 @@
+var _user$project$Model$getPieceAt = F2(
+	function (pieces, _p0) {
+		var _p1 = _p0;
+		return _elm_lang$core$List$head(
+			A2(
+				_elm_lang$core$List$filter,
+				function (piece) {
+					return _elm_lang$core$Native_Utils.eq(
+						piece.pos,
+						{ctor: '_Tuple2', _0: _p1._0, _1: _p1._1});
+				},
+				pieces));
+	});
+var _user$project$Model$pieceAt = F2(
+	function (pieces, _p2) {
+		var _p3 = _p2;
+		return A2(
+			_elm_lang$core$List$any,
+			function (piece) {
+				return _elm_lang$core$Native_Utils.eq(
+					piece.pos,
+					{ctor: '_Tuple2', _0: _p3._0, _1: _p3._1});
+			},
+			pieces);
+	});
+var _user$project$Model$extractPiece = F2(
+	function (pieces, piece) {
+		var newPiece = A2(
+			_elm_lang$core$List$filter,
+			function (p) {
+				return _elm_lang$core$Native_Utils.eq(p.cColor, piece.cColor) && (_elm_lang$core$Native_Utils.eq(p.rank, piece.rank) && _elm_lang$core$Native_Utils.eq(p.pos, piece.pos));
+			},
+			pieces);
+		var newList = A2(
+			_elm_lang$core$List$filter,
+			function (p) {
+				return (!_elm_lang$core$Native_Utils.eq(p.cColor, piece.cColor)) || ((!_elm_lang$core$Native_Utils.eq(p.rank, piece.rank)) || (!_elm_lang$core$Native_Utils.eq(p.pos, piece.pos)));
+			},
+			pieces);
+		return {
+			ctor: '_Tuple2',
+			_0: _elm_lang$core$List$head(newPiece),
+			_1: newList
+		};
+	});
+var _user$project$Model$emptyBoard = {
+	pieces: {ctor: '[]'},
+	whiteCaptured: {ctor: '[]'},
+	blackCaptured: {ctor: '[]'}
+};
+var _user$project$Model$validPos = function (_p4) {
+	var _p5 = _p4;
+	var _p7 = _p5._1;
+	var _p6 = _p5._0;
+	return ((_elm_lang$core$Native_Utils.cmp(_p6, 0) < 0) || ((_elm_lang$core$Native_Utils.cmp(_p6, 7) > 0) || ((_elm_lang$core$Native_Utils.cmp(_p7, 0) < 0) || (_elm_lang$core$Native_Utils.cmp(_p7, 7) < 0)))) ? false : true;
+};
+var _user$project$Model$Piece = F4(
+	function (a, b, c, d) {
+		return {cColor: a, rank: b, pos: c, lastState: d};
+	});
+var _user$project$Model$Board = F3(
+	function (a, b, c) {
+		return {pieces: a, whiteCaptured: b, blackCaptured: c};
+	});
+var _user$project$Model$Model = F2(
+	function (a, b) {
+		return {board: a, command: b};
+	});
+var _user$project$Model$None = {ctor: 'None'};
+var _user$project$Model$validRank = function (rank) {
+	return _elm_lang$core$Native_Utils.eq(rank, _user$project$Model$None) ? true : false;
+};
+var _user$project$Model$Rook = function (a) {
+	return {ctor: 'Rook', _0: a};
+};
+var _user$project$Model$Pawn = {ctor: 'Pawn'};
+var _user$project$Model$Bishop = {ctor: 'Bishop'};
+var _user$project$Model$Knight = {ctor: 'Knight'};
+var _user$project$Model$Queen = {ctor: 'Queen'};
+var _user$project$Model$King = function (a) {
+	return {ctor: 'King', _0: a};
+};
+var _user$project$Model$Black = {ctor: 'Black'};
+var _user$project$Model$White = {ctor: 'White'};
+var _user$project$Model$newBoard = function () {
+	var blackSpecial = {
+		ctor: '::',
+		_0: A4(
+			_user$project$Model$Piece,
+			_user$project$Model$Black,
+			_user$project$Model$Rook(false),
+			{ctor: '_Tuple2', _0: 7, _1: 0},
+			{ctor: '[]'}),
+		_1: {
+			ctor: '::',
+			_0: A4(
+				_user$project$Model$Piece,
+				_user$project$Model$Black,
+				_user$project$Model$Knight,
+				{ctor: '_Tuple2', _0: 7, _1: 1},
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A4(
+					_user$project$Model$Piece,
+					_user$project$Model$Black,
+					_user$project$Model$Bishop,
+					{ctor: '_Tuple2', _0: 7, _1: 2},
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: A4(
+						_user$project$Model$Piece,
+						_user$project$Model$Black,
+						_user$project$Model$King(false),
+						{ctor: '_Tuple2', _0: 7, _1: 3},
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: A4(
+							_user$project$Model$Piece,
+							_user$project$Model$Black,
+							_user$project$Model$Queen,
+							{ctor: '_Tuple2', _0: 7, _1: 4},
+							{ctor: '[]'}),
+						_1: {
+							ctor: '::',
+							_0: A4(
+								_user$project$Model$Piece,
+								_user$project$Model$Black,
+								_user$project$Model$Bishop,
+								{ctor: '_Tuple2', _0: 7, _1: 5},
+								{ctor: '[]'}),
+							_1: {
+								ctor: '::',
+								_0: A4(
+									_user$project$Model$Piece,
+									_user$project$Model$Black,
+									_user$project$Model$Knight,
+									{ctor: '_Tuple2', _0: 7, _1: 6},
+									{ctor: '[]'}),
+								_1: {
+									ctor: '::',
+									_0: A4(
+										_user$project$Model$Piece,
+										_user$project$Model$Black,
+										_user$project$Model$Rook(false),
+										{ctor: '_Tuple2', _0: 7, _1: 7},
+										{ctor: '[]'}),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	};
+	var blackPawns = A2(
+		_elm_lang$core$List$map,
+		function (x) {
+			return A4(
+				_user$project$Model$Piece,
+				_user$project$Model$Black,
+				_user$project$Model$Pawn,
+				{ctor: '_Tuple2', _0: 6, _1: x},
+				{ctor: '[]'});
+		},
+		A2(_elm_lang$core$List$range, 0, 7));
+	var whiteSpecial = {
+		ctor: '::',
+		_0: A4(
+			_user$project$Model$Piece,
+			_user$project$Model$White,
+			_user$project$Model$Rook(false),
+			{ctor: '_Tuple2', _0: 0, _1: 0},
+			{ctor: '[]'}),
+		_1: {
+			ctor: '::',
+			_0: A4(
+				_user$project$Model$Piece,
+				_user$project$Model$White,
+				_user$project$Model$Knight,
+				{ctor: '_Tuple2', _0: 0, _1: 1},
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A4(
+					_user$project$Model$Piece,
+					_user$project$Model$White,
+					_user$project$Model$Bishop,
+					{ctor: '_Tuple2', _0: 0, _1: 2},
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: A4(
+						_user$project$Model$Piece,
+						_user$project$Model$White,
+						_user$project$Model$King(false),
+						{ctor: '_Tuple2', _0: 0, _1: 3},
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: A4(
+							_user$project$Model$Piece,
+							_user$project$Model$White,
+							_user$project$Model$Queen,
+							{ctor: '_Tuple2', _0: 0, _1: 4},
+							{ctor: '[]'}),
+						_1: {
+							ctor: '::',
+							_0: A4(
+								_user$project$Model$Piece,
+								_user$project$Model$White,
+								_user$project$Model$Bishop,
+								{ctor: '_Tuple2', _0: 0, _1: 5},
+								{ctor: '[]'}),
+							_1: {
+								ctor: '::',
+								_0: A4(
+									_user$project$Model$Piece,
+									_user$project$Model$White,
+									_user$project$Model$Knight,
+									{ctor: '_Tuple2', _0: 0, _1: 6},
+									{ctor: '[]'}),
+								_1: {
+									ctor: '::',
+									_0: A4(
+										_user$project$Model$Piece,
+										_user$project$Model$White,
+										_user$project$Model$Rook(false),
+										{ctor: '_Tuple2', _0: 0, _1: 7},
+										{ctor: '[]'}),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	};
+	var whitePawns = A2(
+		_elm_lang$core$List$map,
+		function (x) {
+			return A4(
+				_user$project$Model$Piece,
+				_user$project$Model$White,
+				_user$project$Model$Pawn,
+				{ctor: '_Tuple2', _0: 1, _1: x},
+				{ctor: '[]'});
+		},
+		A2(_elm_lang$core$List$range, 0, 7));
+	return {
+		pieces: A2(
+			_elm_lang$core$Basics_ops['++'],
+			whitePawns,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				whiteSpecial,
+				A2(_elm_lang$core$Basics_ops['++'], blackPawns, blackSpecial))),
+		whiteCaptured: {ctor: '[]'},
+		blackCaptured: {ctor: '[]'}
+	};
+}();
+var _user$project$Model$applyState = F3(
+	function (board, templatePiece, state) {
+		var _p8 = A2(_user$project$Model$extractPiece, board.pieces, templatePiece);
+		var realPiece = _p8._0;
+		var otherPieces = _p8._1;
+		var _p9 = realPiece;
+		if (_p9.ctor === 'Just') {
+			var _p19 = _p9._0;
+			var _p10 = state;
+			switch (_p10.ctor) {
+				case 'MoveTo':
+					var newPiece = _elm_lang$core$Native_Utils.update(
+						_p19,
+						{pos: _p10._0});
+					return {
+						ctor: '_Tuple2',
+						_0: newPiece,
+						_1: _elm_lang$core$Native_Utils.update(
+							board,
+							{
+								pieces: {ctor: '::', _0: newPiece, _1: otherPieces}
+							})
+					};
+				case 'Capture':
+					var _p11 = A2(_user$project$Model$extractPiece, otherPieces, _p10._0);
+					var toCapture = _p11._0;
+					var others = _p11._1;
+					var _p12 = toCapture;
+					if (_p12.ctor === 'Just') {
+						var _p13 = _p12._0;
+						return _elm_lang$core$Native_Utils.eq(_p19.cColor, _user$project$Model$White) ? {
+							ctor: '_Tuple2',
+							_0: _elm_lang$core$Native_Utils.update(
+								_p19,
+								{pos: _p13.pos}),
+							_1: _elm_lang$core$Native_Utils.update(
+								board,
+								{
+									pieces: {
+										ctor: '::',
+										_0: _elm_lang$core$Native_Utils.update(
+											_p19,
+											{pos: _p13.pos}),
+										_1: others
+									},
+									whiteCaptured: {ctor: '::', _0: _p13, _1: board.whiteCaptured}
+								})
+						} : {
+							ctor: '_Tuple2',
+							_0: _elm_lang$core$Native_Utils.update(
+								_p19,
+								{pos: _p13.pos}),
+							_1: _elm_lang$core$Native_Utils.update(
+								board,
+								{
+									pieces: {
+										ctor: '::',
+										_0: _elm_lang$core$Native_Utils.update(
+											_p19,
+											{pos: _p13.pos}),
+										_1: others
+									},
+									blackCaptured: {ctor: '::', _0: _p13, _1: board.blackCaptured}
+								})
+						};
+					} else {
+						return {ctor: '_Tuple2', _0: _p19, _1: board};
+					}
+				case 'CastleWith':
+					var _p14 = A2(_user$project$Model$extractPiece, otherPieces, _p10._0);
+					var actualCastle = _p14._0;
+					var others = _p14._1;
+					var _p15 = actualCastle;
+					if (_p15.ctor === 'Just') {
+						var _p18 = _p15._0;
+						var _p16 = _p19.pos;
+						var row = _p16._0;
+						var col = _p16._1;
+						var _p17 = _p18.pos;
+						var cR = _p17._0;
+						var cC = _p17._1;
+						return (_elm_lang$core$Native_Utils.cmp(cC, col) < 0) ? {
+							ctor: '_Tuple2',
+							_0: _elm_lang$core$Native_Utils.update(
+								_p19,
+								{
+									pos: {ctor: '_Tuple2', _0: row, _1: col - 2}
+								}),
+							_1: _elm_lang$core$Native_Utils.update(
+								board,
+								{
+									pieces: A2(
+										_elm_lang$core$Basics_ops['++'],
+										{
+											ctor: '::',
+											_0: _elm_lang$core$Native_Utils.update(
+												_p19,
+												{
+													pos: {ctor: '_Tuple2', _0: row, _1: col - 2}
+												}),
+											_1: {ctor: '[]'}
+										},
+										A2(
+											_elm_lang$core$Basics_ops['++'],
+											{
+												ctor: '::',
+												_0: _elm_lang$core$Native_Utils.update(
+													_p18,
+													{
+														pos: {ctor: '_Tuple2', _0: row, _1: col - 1}
+													}),
+												_1: {ctor: '[]'}
+											},
+											others))
+								})
+						} : {
+							ctor: '_Tuple2',
+							_0: _elm_lang$core$Native_Utils.update(
+								_p19,
+								{
+									pos: {ctor: '_Tuple2', _0: row, _1: col + 2}
+								}),
+							_1: _elm_lang$core$Native_Utils.update(
+								board,
+								{
+									pieces: A2(
+										_elm_lang$core$Basics_ops['++'],
+										{
+											ctor: '::',
+											_0: _elm_lang$core$Native_Utils.update(
+												_p19,
+												{
+													pos: {ctor: '_Tuple2', _0: row, _1: col + 2}
+												}),
+											_1: {ctor: '[]'}
+										},
+										A2(
+											_elm_lang$core$Basics_ops['++'],
+											{
+												ctor: '::',
+												_0: _elm_lang$core$Native_Utils.update(
+													_p18,
+													{
+														pos: {ctor: '_Tuple2', _0: row, _1: col + 1}
+													}),
+												_1: {ctor: '[]'}
+											},
+											others))
+								})
+						};
+					} else {
+						return {ctor: '_Tuple2', _0: _p19, _1: board};
+					}
+				case 'Promote':
+					var newPiece = A4(_user$project$Model$Piece, _p19.cColor, _user$project$Model$Queen, _p19.pos, _p19.lastState);
+					return {
+						ctor: '_Tuple2',
+						_0: newPiece,
+						_1: _elm_lang$core$Native_Utils.update(
+							board,
+							{
+								pieces: {ctor: '::', _0: newPiece, _1: otherPieces}
+							})
+					};
+				default:
+					return {ctor: '_Tuple2', _0: _p19, _1: board};
+			}
+		} else {
+			return {ctor: '_Tuple2', _0: templatePiece, _1: board};
+		}
+	});
+var _user$project$Model$applyStates = F3(
+	function (board, piece, states) {
+		var apply = F3(
+			function (board, piece, stateList) {
+				apply:
+				while (true) {
+					var _p20 = _elm_lang$core$List$head(stateList);
+					if (_p20.ctor === 'Just') {
+						var _p21 = A3(_user$project$Model$applyState, board, piece, _p20._0);
+						var updatedPiece = _p21._0;
+						var updatedBoard = _p21._1;
+						var _v8 = updatedBoard,
+							_v9 = updatedPiece,
+							_v10 = A2(_elm_lang$core$List$drop, 1, stateList);
+						board = _v8;
+						piece = _v9;
+						stateList = _v10;
+						continue apply;
+					} else {
+						return {ctor: '_Tuple2', _0: piece, _1: board};
+					}
+				}
+			});
+		var _p22 = A3(apply, board, piece, states);
+		var updatedPiece = _p22._0;
+		var updatedBoard = _p22._1;
+		var _p23 = A2(_user$project$Model$extractPiece, updatedBoard.pieces, updatedPiece);
+		var newPiece = _p23._0;
+		var others = _p23._1;
+		var _p24 = newPiece;
+		if (_p24.ctor === 'Just') {
+			var p = _elm_lang$core$Native_Utils.update(
+				_p24._0,
+				{lastState: states});
+			return {
+				ctor: '_Tuple2',
+				_0: p,
+				_1: _elm_lang$core$Native_Utils.update(
+					updatedBoard,
+					{
+						pieces: {ctor: '::', _0: p, _1: others}
+					})
+			};
+		} else {
+			return {
+				ctor: '_Tuple2',
+				_0: _elm_lang$core$Native_Utils.update(
+					updatedPiece,
+					{lastState: states}),
+				_1: updatedBoard
+			};
+		}
+	});
+var _user$project$Model$JumpAhead = {ctor: 'JumpAhead'};
+var _user$project$Model$Promote = {ctor: 'Promote'};
+var _user$project$Model$CastleWith = function (a) {
+	return {ctor: 'CastleWith', _0: a};
+};
+var _user$project$Model$Capture = function (a) {
+	return {ctor: 'Capture', _0: a};
+};
+var _user$project$Model$MoveTo = function (a) {
+	return {ctor: 'MoveTo', _0: a};
+};
+var _user$project$Model$moveAndCaptureStates = F3(
+	function (board, piece, dir) {
+		var friendlyPieces = A2(
+			_elm_lang$core$List$filter,
+			function (p) {
+				return _elm_lang$core$Native_Utils.eq(p.cColor, piece.cColor);
+			},
+			board.pieces);
+		var opposingPieces = A2(
+			_elm_lang$core$List$filter,
+			function (p) {
+				return !_elm_lang$core$Native_Utils.eq(p.cColor, piece.cColor);
+			},
+			board.pieces);
+		var f = F3(
+			function (_p26, _p25, runningList) {
+				var _p27 = _p26;
+				var _p28 = _p25;
+				var _p31 = _p28._0;
+				var _p30 = _p28._1;
+				var _p29 = {ctor: '_Tuple2', _0: _p27._0 + _p31, _1: _p27._1 + _p30};
+				var newR = _p29._0;
+				var newC = _p29._1;
+				if (_user$project$Model$validPos(
+					{ctor: '_Tuple2', _0: newR, _1: newC})) {
+					if (A2(
+						_user$project$Model$pieceAt,
+						opposingPieces,
+						{ctor: '_Tuple2', _0: newR, _1: newC})) {
+						var pieceToCapture = A2(
+							_elm_lang$core$Maybe$withDefault,
+							A4(
+								_user$project$Model$Piece,
+								_user$project$Model$White,
+								_user$project$Model$None,
+								{ctor: '_Tuple2', _0: -1, _1: -1},
+								{ctor: '[]'}),
+							A2(
+								_user$project$Model$getPieceAt,
+								opposingPieces,
+								{ctor: '_Tuple2', _0: newR, _1: newC}));
+						return {
+							ctor: '::',
+							_0: {
+								ctor: '::',
+								_0: _user$project$Model$Capture(pieceToCapture),
+								_1: {ctor: '[]'}
+							},
+							_1: A3(
+								f,
+								{ctor: '_Tuple2', _0: newR, _1: newC},
+								{ctor: '_Tuple2', _0: _p31, _1: _p30},
+								runningList)
+						};
+					} else {
+						if (A2(
+							_user$project$Model$pieceAt,
+							friendlyPieces,
+							{ctor: '_Tuple2', _0: newR, _1: newC})) {
+							return runningList;
+						} else {
+							return {
+								ctor: '::',
+								_0: {
+									ctor: '::',
+									_0: _user$project$Model$MoveTo(
+										{ctor: '_Tuple2', _0: newR, _1: newC}),
+									_1: {ctor: '[]'}
+								},
+								_1: A3(
+									f,
+									{ctor: '_Tuple2', _0: newR, _1: newC},
+									{ctor: '_Tuple2', _0: _p31, _1: _p30},
+									runningList)
+							};
+						}
+					}
+				} else {
+					return runningList;
+				}
+			});
+		return A3(
+			f,
+			piece.pos,
+			dir,
+			{ctor: '[]'});
+	});
+var _user$project$Model$getSuccesorStateRook = F2(
+	function (board, piece) {
+		var possibleStates = A2(
+			_elm_lang$core$Basics_ops['++'],
+			A3(
+				_user$project$Model$moveAndCaptureStates,
+				board,
+				piece,
+				{ctor: '_Tuple2', _0: 1, _1: 0}),
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				A3(
+					_user$project$Model$moveAndCaptureStates,
+					board,
+					piece,
+					{ctor: '_Tuple2', _0: -1, _1: 0}),
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					A3(
+						_user$project$Model$moveAndCaptureStates,
+						board,
+						piece,
+						{ctor: '_Tuple2', _0: 0, _1: 1}),
+					A3(
+						_user$project$Model$moveAndCaptureStates,
+						board,
+						piece,
+						{ctor: '_Tuple2', _0: 0, _1: -1}))));
+		return possibleStates;
+	});
+var _user$project$Model$getSuccessorStateBishop = F2(
+	function (board, piece) {
+		return A2(
+			_elm_lang$core$Basics_ops['++'],
+			A3(
+				_user$project$Model$moveAndCaptureStates,
+				board,
+				piece,
+				{ctor: '_Tuple2', _0: 1, _1: 1}),
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				A3(
+					_user$project$Model$moveAndCaptureStates,
+					board,
+					piece,
+					{ctor: '_Tuple2', _0: 1, _1: -1}),
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					A3(
+						_user$project$Model$moveAndCaptureStates,
+						board,
+						piece,
+						{ctor: '_Tuple2', _0: -1, _1: 1}),
+					A3(
+						_user$project$Model$moveAndCaptureStates,
+						board,
+						piece,
+						{ctor: '_Tuple2', _0: -1, _1: -1}))));
+	});
+var _user$project$Model$getSuccesorStateQueen = F2(
+	function (board, piece) {
+		return A2(
+			_elm_lang$core$Basics_ops['++'],
+			A2(_user$project$Model$getSuccesorStateRook, board, piece),
+			A2(_user$project$Model$getSuccessorStateBishop, board, piece));
+	});
+var _user$project$Model$getSuccesorStateKnight = F2(
+	function (board, piece) {
+		var _p32 = piece.pos;
+		var row = _p32._0;
+		var col = _p32._1;
+		var friendlyPieces = A2(
+			_elm_lang$core$List$filter,
+			function (p) {
+				return _elm_lang$core$Native_Utils.eq(p.cColor, piece.cColor);
+			},
+			board.pieces);
+		var possiblePositions = A2(
+			_elm_lang$core$List$filter,
+			function (pos) {
+				return !A2(_user$project$Model$pieceAt, friendlyPieces, pos);
+			},
+			A2(
+				_elm_lang$core$List$filter,
+				_user$project$Model$validPos,
+				{
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: row + 2, _1: col + 1},
+					_1: {
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: row + 2, _1: col - 1},
+						_1: {
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: row + 1, _1: col + 2},
+							_1: {
+								ctor: '::',
+								_0: {ctor: '_Tuple2', _0: row + 1, _1: col - 2},
+								_1: {
+									ctor: '::',
+									_0: {ctor: '_Tuple2', _0: row - 1, _1: col + 2},
+									_1: {
+										ctor: '::',
+										_0: {ctor: '_Tuple2', _0: row - 1, _1: col - 2},
+										_1: {
+											ctor: '::',
+											_0: {ctor: '_Tuple2', _0: row - 2, _1: col + 1},
+											_1: {
+												ctor: '::',
+												_0: {ctor: '_Tuple2', _0: row - 2, _1: col - 1},
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}));
+		var opposingPieces = A2(
+			_elm_lang$core$List$filter,
+			function (p) {
+				return !_elm_lang$core$Native_Utils.eq(p.cColor, piece.cColor);
+			},
+			board.pieces);
+		var possibleStates = A2(
+			_elm_lang$core$List$map,
+			function (pos) {
+				var _p33 = A2(_user$project$Model$getPieceAt, opposingPieces, pos);
+				if (_p33.ctor === 'Just') {
+					return {
+						ctor: '::',
+						_0: _user$project$Model$Capture(_p33._0),
+						_1: {ctor: '[]'}
+					};
+				} else {
+					return {
+						ctor: '::',
+						_0: _user$project$Model$MoveTo(pos),
+						_1: {ctor: '[]'}
+					};
+				}
+			},
+			possiblePositions);
+		return possibleStates;
+	});
+var _user$project$Model$getSuccesorStatePawn = F2(
+	function (board, piece) {
+		var _p34 = piece.pos;
+		var row = _p34._0;
+		var col = _p34._1;
+		var enPassantPositions = A2(
+			_elm_lang$core$List$filter,
+			_user$project$Model$validPos,
+			{
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: row, _1: col - 1},
+				_1: {
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: row, _1: col + 1},
+					_1: {ctor: '[]'}
+				}
+			});
+		var opposingPieces = A2(
+			_elm_lang$core$List$filter,
+			function (p) {
+				return !_elm_lang$core$Native_Utils.eq(p.cColor, piece.cColor);
+			},
+			board.pieces);
+		var enPassantPawns = A2(
+			_elm_lang$core$List$filter,
+			function (piece) {
+				return _elm_lang$core$Native_Utils.eq(piece.rank, _user$project$Model$Pawn) && A2(_elm_lang$core$List$member, _user$project$Model$JumpAhead, piece.lastState);
+			},
+			opposingPieces);
+		var enPassantPieces = A2(
+			_elm_lang$core$List$map,
+			function (pos) {
+				return {
+					ctor: '_Tuple2',
+					_0: pos,
+					_1: A2(_user$project$Model$getPieceAt, enPassantPawns, pos)
+				};
+			},
+			enPassantPositions);
+		var direction = _elm_lang$core$Native_Utils.eq(piece.cColor, _user$project$Model$White) ? 1 : -1;
+		var capturePositions = A2(
+			_elm_lang$core$List$filter,
+			_user$project$Model$validPos,
+			{
+				ctor: '::',
+				_0: {ctor: '_Tuple2', _0: row + direction, _1: col - 1},
+				_1: {
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: row + direction, _1: col + 1},
+					_1: {ctor: '[]'}
+				}
+			});
+		var capturedPieces = A2(
+			_elm_lang$core$List$map,
+			function (pos) {
+				return {
+					ctor: '_Tuple2',
+					_0: pos,
+					_1: A2(_user$project$Model$getPieceAt, opposingPieces, pos)
+				};
+			},
+			capturePositions);
+		var captureStates = A2(
+			_elm_lang$core$List$filter,
+			function (state) {
+				return !_elm_lang$core$List$isEmpty(state);
+			},
+			A2(
+				_elm_lang$core$List$map,
+				function (_p35) {
+					var _p36 = _p35;
+					var _p37 = _p36._1;
+					if (_p37.ctor === 'Just') {
+						return {
+							ctor: '::',
+							_0: _user$project$Model$MoveTo(_p36._0),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Model$Capture(_p37._0),
+								_1: {ctor: '[]'}
+							}
+						};
+					} else {
+						return {ctor: '[]'};
+					}
+				},
+				capturedPieces));
+		var endingRow = _elm_lang$core$Native_Utils.eq(piece.cColor, _user$project$Model$White) ? 7 : 0;
+		var goForward = ((!_user$project$Model$validPos(
+			{ctor: '_Tuple2', _0: row + direction, _1: col})) || A2(
+			_user$project$Model$pieceAt,
+			board.pieces,
+			{ctor: '_Tuple2', _0: row + direction, _1: col})) ? {ctor: '[]'} : (_elm_lang$core$Native_Utils.eq(row + direction, endingRow) ? {
+			ctor: '::',
+			_0: {
+				ctor: '::',
+				_0: _user$project$Model$MoveTo(
+					{ctor: '_Tuple2', _0: row + direction, _1: col}),
+				_1: {
+					ctor: '::',
+					_0: _user$project$Model$Promote,
+					_1: {ctor: '[]'}
+				}
+			},
+			_1: {ctor: '[]'}
+		} : {
+			ctor: '::',
+			_0: {
+				ctor: '::',
+				_0: _user$project$Model$MoveTo(
+					{ctor: '_Tuple2', _0: row + direction, _1: col}),
+				_1: {ctor: '[]'}
+			},
+			_1: {ctor: '[]'}
+		});
+		var startingRow = _elm_lang$core$Native_Utils.eq(piece.cColor, _user$project$Model$White) ? 1 : 6;
+		var goForwardTwice = ((!_elm_lang$core$Native_Utils.eq(row, startingRow)) || A2(
+			_user$project$Model$pieceAt,
+			board.pieces,
+			{ctor: '_Tuple2', _0: row + (2 * direction), _1: col})) ? {ctor: '[]'} : {
+			ctor: '::',
+			_0: {
+				ctor: '::',
+				_0: _user$project$Model$MoveTo(
+					{ctor: '_Tuple2', _0: row + direction, _1: col}),
+				_1: {
+					ctor: '::',
+					_0: _user$project$Model$JumpAhead,
+					_1: {ctor: '[]'}
+				}
+			},
+			_1: {ctor: '[]'}
+		};
+		var enPassantStates = (!_elm_lang$core$Native_Utils.eq(row, startingRow + (3 * direction))) ? {ctor: '[]'} : A2(
+			_elm_lang$core$List$filter,
+			function (state) {
+				return !_elm_lang$core$List$isEmpty(state);
+			},
+			A2(
+				_elm_lang$core$List$map,
+				function (_p38) {
+					var _p39 = _p38;
+					var _p40 = _p39._1;
+					if (_p40.ctor === 'Just') {
+						return {
+							ctor: '::',
+							_0: _user$project$Model$MoveTo(_p39._0),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Model$Capture(_p40._0),
+								_1: {ctor: '[]'}
+							}
+						};
+					} else {
+						return {ctor: '[]'};
+					}
+				},
+				enPassantPieces));
+		return A2(
+			_elm_lang$core$Basics_ops['++'],
+			goForward,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				goForwardTwice,
+				A2(_elm_lang$core$Basics_ops['++'], captureStates, enPassantStates)));
+	});
+var _user$project$Model$getSuccesorState = F2(
+	function (board, piece) {
+		var _p41 = piece.rank;
+		switch (_p41.ctor) {
+			case 'King':
+				return A2(_user$project$Model$getSuccesorStateKing, board, piece);
+			case 'Queen':
+				return A2(_user$project$Model$getSuccesorStateQueen, board, piece);
+			case 'Bishop':
+				return A2(_user$project$Model$getSuccessorStateBishop, board, piece);
+			case 'Knight':
+				return A2(_user$project$Model$getSuccesorStateKnight, board, piece);
+			case 'Rook':
+				return A2(_user$project$Model$getSuccesorStateRook, board, piece);
+			case 'Pawn':
+				return A2(_user$project$Model$getSuccesorStatePawn, board, piece);
+			default:
+				return {ctor: '[]'};
+		}
+	});
+var _user$project$Model$getSuccesorStateKing = F2(
+	function (board, piece) {
+		var _p42 = piece.pos;
+		var row = _p42._0;
+		var col = _p42._1;
+		var friendlyPieces = A2(
+			_elm_lang$core$List$filter,
+			function (p) {
+				return _elm_lang$core$Native_Utils.eq(p.cColor, piece.cColor);
+			},
+			board.pieces);
+		var possiblePositions = A2(
+			_elm_lang$core$List$filter,
+			function (pos) {
+				return !A2(_user$project$Model$pieceAt, friendlyPieces, pos);
+			},
+			A2(
+				_elm_lang$core$List$filter,
+				_user$project$Model$validPos,
+				{
+					ctor: '::',
+					_0: {ctor: '_Tuple2', _0: row + 1, _1: col + 1},
+					_1: {
+						ctor: '::',
+						_0: {ctor: '_Tuple2', _0: row + 1, _1: col - 1},
+						_1: {
+							ctor: '::',
+							_0: {ctor: '_Tuple2', _0: row + 1, _1: col},
+							_1: {
+								ctor: '::',
+								_0: {ctor: '_Tuple2', _0: row, _1: col + 1},
+								_1: {
+									ctor: '::',
+									_0: {ctor: '_Tuple2', _0: row, _1: col - 1},
+									_1: {
+										ctor: '::',
+										_0: {ctor: '_Tuple2', _0: row - 1, _1: col + 1},
+										_1: {
+											ctor: '::',
+											_0: {ctor: '_Tuple2', _0: row - 1, _1: col - 1},
+											_1: {
+												ctor: '::',
+												_0: {ctor: '_Tuple2', _0: row - 1, _1: col},
+												_1: {ctor: '[]'}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}));
+		var castleStates = function () {
+			if (_elm_lang$core$Native_Utils.eq(
+				piece.rank,
+				_user$project$Model$King(false))) {
+				var castlingPieces = A2(
+					_elm_lang$core$List$filter,
+					function (p) {
+						return _elm_lang$core$Native_Utils.eq(
+							p.rank,
+							_user$project$Model$Rook(false));
+					},
+					friendlyPieces);
+				var canCastle = A2(
+					_elm_lang$core$List$filter,
+					function (castle) {
+						var _p43 = castle.pos;
+						var cR = _p43._0;
+						var cC = _p43._1;
+						var emptyCol = (_elm_lang$core$Native_Utils.cmp(cC, col) < 0) ? A2(_elm_lang$core$List$range, cC + 1, col - 1) : A2(_elm_lang$core$List$range, col + 1, cC - 1);
+						var emptyPos = A2(
+							_elm_lang$core$List$map,
+							function (c) {
+								return {ctor: '_Tuple2', _0: cR, _1: c};
+							},
+							emptyCol);
+						return A2(
+							_elm_lang$core$List$any,
+							_user$project$Model$pieceAt(board.pieces),
+							emptyPos) ? false : true;
+					},
+					castlingPieces);
+				return A2(
+					_elm_lang$core$List$map,
+					function (castle) {
+						return {
+							ctor: '::',
+							_0: _user$project$Model$CastleWith(castle),
+							_1: {ctor: '[]'}
+						};
+					},
+					canCastle);
+			} else {
+				return {ctor: '[]'};
+			}
+		}();
+		var opposingPieces = A2(
+			_elm_lang$core$List$filter,
+			function (p) {
+				return !_elm_lang$core$Native_Utils.eq(p.cColor, piece.cColor);
+			},
+			board.pieces);
+		var captureStates = A2(
+			_elm_lang$core$List$map,
+			function (pos) {
+				var _p44 = A2(_user$project$Model$getPieceAt, opposingPieces, pos);
+				if (_p44.ctor === 'Just') {
+					return {
+						ctor: '::',
+						_0: _user$project$Model$Capture(_p44._0),
+						_1: {ctor: '[]'}
+					};
+				} else {
+					return {
+						ctor: '::',
+						_0: _user$project$Model$MoveTo(pos),
+						_1: {ctor: '[]'}
+					};
+				}
+			},
+			possiblePositions);
+		return A2(
+			_elm_lang$core$List$filter,
+			function (stateList) {
+				var _p45 = A3(_user$project$Model$applyStates, board, piece, stateList);
+				var newPiece = _p45._0;
+				var newBoard = _p45._1;
+				return A2(_user$project$Model$inCheck, newBoard, newPiece) ? false : true;
+			},
+			A2(_elm_lang$core$Basics_ops['++'], captureStates, castleStates));
+	});
+var _user$project$Model$inCheck = F2(
+	function (board, piece) {
+		var _p46 = piece.rank;
+		if (_p46.ctor === 'King') {
+			var opposingPieces = A2(
+				_elm_lang$core$List$filter,
+				function (p) {
+					return !_elm_lang$core$Native_Utils.eq(p.cColor, piece.cColor);
+				},
+				board.pieces);
+			var states = A3(
+				_elm_lang$core$List$foldr,
+				F2(
+					function (x, y) {
+						return A2(_elm_lang$core$Basics_ops['++'], x, y);
+					}),
+				{ctor: '[]'},
+				A3(
+					_elm_lang$core$List$foldr,
+					F2(
+						function (x, y) {
+							return A2(_elm_lang$core$Basics_ops['++'], x, y);
+						}),
+					{ctor: '[]'},
+					A2(
+						_elm_lang$core$List$map,
+						_user$project$Model$getSuccesorState(board),
+						opposingPieces)));
+			return A2(
+				_elm_lang$core$List$any,
+				function (state) {
+					var _p47 = state;
+					if (_p47.ctor === 'Capture') {
+						var _p48 = _p47._0;
+						return ((_elm_lang$core$Native_Utils.eq(
+							_p48.rank,
+							_user$project$Model$King(true)) || _elm_lang$core$Native_Utils.eq(
+							_p48.rank,
+							_user$project$Model$King(false))) && _elm_lang$core$Native_Utils.eq(_p48.cColor, piece.cColor)) ? true : false;
+					} else {
+						return false;
+					}
+				},
+				states) ? true : false;
+		} else {
+			return false;
+		}
+	});
